@@ -23,21 +23,9 @@ SOFTWARE.
 
 Purpose: Contains all of the methods for manipulating textures for SDL
 
-Author: James Womack
+Author: Dev, James Womack
 
 ********************************************************************************/
 #pragma once
 
 #include "../Common.h"
-
-#include <SDL.h>
-#include <SDL_image.h>
-
-class GameTexture {
-public:
-	GameTexture();
-	~GameTexture();
-	bool load_from_file();
-private:
-	SDL_Texture* texture;
-};
