@@ -29,7 +29,6 @@ Author: James Womack
 ********************************************************************************/
 #pragma once
 
-#include <SDL_image.h>
 #include <string>
 #include "Texture.h"
 #include "../Common.h"
@@ -37,7 +36,7 @@ Author: James Womack
 
 class SpriteSheet {
 private:
-	Texture * texture;
+	//Texture * texture;
 
 public:
 	SpriteSheet(std::string path);

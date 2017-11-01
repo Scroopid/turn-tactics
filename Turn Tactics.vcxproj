@@ -19,21 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Event\KeyMappings.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Render\SpriteSheet.cpp" />
     <ClCompile Include="Src\Render\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Common.h" />
-    <ClInclude Include="Src\Event\EventManager.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Src\Event\KeyMappings.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Src\Math\Collision.h">
       <SubType>
       </SubType>
@@ -51,6 +42,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Src\Render\Texture.h" />
+    <ClInclude Include="Src\Test\EventSource.h" />
     <ClInclude Include="Src\Util\Logger.h">
       <SubType>
       </SubType>
@@ -114,23 +106,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Lib\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>Lib\SDL2;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Lib\SDL2_image\include;Lib\SDL2_net\include;Lib\SDL2_ttf\include;Lib\SDL2_mixer\include;Lib\SDL2\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>Lib\SDL2_ttf;Lib\SDL2_net;Lib\SDL2_image;Lib\SDL2_mixer;Lib\SDL2;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+    <IncludePath>$(ProjectDir)Lib\glew\include;$(ProjectDir)Lib\glfw\include;$(ProjectDir)Lib\glm;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Lib\glew\lib\Release\x64;$(ProjectDir)Lib\glfw\lib\Debug;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>Lib\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>Lib\SDL2;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>Lib\SDL2_image\include;Lib\SDL2_net\include;Lib\SDL2_ttf\include;Lib\SDL2_mixer\include;Lib\SDL2\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>Lib\SDL2_ttf;Lib\SDL2_net;Lib\SDL2_image;Lib\SDL2_mixer;Lib\SDL2;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+    <IncludePath>$(ProjectDir)Lib\glew\include;$(ProjectDir)Lib\glfw\include;$(ProjectDir)Lib\glm;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Lib\glew\lib\Release\x64;$(ProjectDir)Lib\glfw\lib\Release;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -140,14 +132,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command> xcopy /d /y "$(ProjectDir)Lib\SDL2\*dll*" "$(OutDir)"</Command>
+      <Command> xcopy /d /y "$(ProjectDir)Lib\glew\bin\Release\Win32\*dll*" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -158,18 +151,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_net.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command> xcopy /d /y "$(ProjectDir)Lib\SDL2\*dll*" "$(OutDir)"
- xcopy /d /y "$(ProjectDir)Lib\SDL2_mixer\*dll*" "$(OutDir)"
- xcopy /d /y "$(ProjectDir)Lib\SDL2_image\*dll*" "$(OutDir)"
- xcopy /d /y "$(ProjectDir)Lib\SDL2_net\*dll*" "$(OutDir)"
- xcopy /d /y "$(ProjectDir)Lib\SDL2_ttf\*dll*" "$(OutDir)"</Command>
+      <Command> xcopy /d /y "$(ProjectDir)Lib\glew\bin\Release\x64\*dll*" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -182,16 +172,17 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command> xcopy /d /y "$(ProjectDir)Lib\SDL2\*dll*" "$(OutDir)"</Command>
+      <Command> xcopy /d /y "$(ProjectDir)Lib\glew\bin\Release\Win32\*dll*" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -204,20 +195,18 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_net.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command> xcopy /d /y "$(ProjectDir)Lib\SDL2\*dll*" "$(OutDir)"
- xcopy /d /y "$(ProjectDir)Lib\SDL2_mixer\*dll*" "$(OutDir)"
- xcopy /d /y "$(ProjectDir)Lib\SDL2_image\*dll*" "$(OutDir)"
- xcopy /d /y "$(ProjectDir)Lib\SDL2_net\*dll*" "$(OutDir)"
- xcopy /d /y "$(ProjectDir)Lib\SDL2_ttf\*dll*" "$(OutDir)"</Command>
+      <Command> xcopy /d /y "$(ProjectDir)Lib\glew\bin\Release\x64\*dll*" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

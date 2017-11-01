@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Src\Event\KeyMappings.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Render\SpriteSheet.cpp" />
     <ClCompile Include="Src\Render\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Common.h" />
-    <ClInclude Include="Src\Event\EventManager.h" />
-    <ClInclude Include="Src\Event\KeyMappings.h" />
     <ClInclude Include="Src\Math\Collision.h" />
     <ClInclude Include="Src\Math\Common.h" />
     <ClInclude Include="Src\Render\Particles.h" />
@@ -17,5 +14,6 @@
     <ClInclude Include="Src\Render\Texture.h" />
     <ClInclude Include="Src\Util\Logger.h" />
     <ClInclude Include="Src\Util\MemoryPool.h" />
+    <ClInclude Include="Src\Test\EventSource.h" />
   </ItemGroup>
 </Project>

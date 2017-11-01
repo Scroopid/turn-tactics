@@ -1,181 +1,52 @@
-/*This source code copyrighted by Lazy Foo' Productions (2004-2015)
-and may not be redistributed without written permission.*/
+#include <iostream>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
-//Using SDL, SDL_image, standard IO, and strings
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdio.h>
-#include <string>
-
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-//Starts up SDL and creates window
-bool init();
-
-//Loads media
-bool loadMedia();
-
-//Frees media and shuts down SDL
-void close();
-
-//Loads individual image
-SDL_Surface* loadSurface(std::string path);
-
-//The window we'll be rendering to
-SDL_Window* gWindow = NULL;
-
-//The surface contained by the window
-SDL_Surface* gScreenSurface = NULL;
-
-//Current displayed PNG image
-SDL_Surface* gPNGSurface = NULL;
-
-bool init()
-{
-  //Initialization flag
-  bool success = true;
-
-  //Initialize SDL
-  if (SDL_Init(SDL_INIT_VIDEO) < 0)
-  {
-    printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
-    success = false;
-  }
-  else
-  {
-    //Create window
-    gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    if (gWindow == NULL)
-    {
-      printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
-      success = false;
-    }
-    else
-    {
-      //Initialize PNG loading
-      int imgFlags = IMG_INIT_PNG;
-      if (!(IMG_Init(imgFlags) & imgFlags))
-      {
-        printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
-        success = false;
-      }
-      else
-      {
-        //Get window surface
-        gScreenSurface = SDL_GetWindowSurface(gWindow);
-      }
-    }
-  }
-
-  return success;
-}
-
-bool loadMedia()
-{
-  //Loading success flag
-  bool success = true;
-
-  //Load PNG surface
-  gPNGSurface = loadSurface("Res/loaded.png");
-  if (gPNGSurface == NULL)
-  {
-    printf("Failed to load PNG image!\n");
-    success = false;
-  }
-
-  return success;
-}
-
-void close()
-{
-  //Free loaded image
-  SDL_FreeSurface(gPNGSurface);
-  gPNGSurface = NULL;
-
-  //Destroy window
-  SDL_DestroyWindow(gWindow);
-  gWindow = NULL;
-
-  //Quit SDL subsystems
-  IMG_Quit();
-  SDL_Quit();
-}
-
-SDL_Surface* loadSurface(std::string path)
-{
-  //The final optimized image
-  SDL_Surface* optimizedSurface = NULL;
-
-  //Load image at specified path
-  SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-  if (loadedSurface == NULL)
-  {
-    printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
-  }
-  else
-  {
-    //Convert surface to screen format
-    optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, NULL);
-    if (optimizedSurface == NULL)
-    {
-      printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
-    }
-
-    //Get rid of old loaded surface
-    SDL_FreeSurface(loadedSurface);
-  }
-
-  return optimizedSurface;
-}
+using namespace glm;
 
 int main(int argc, char* args[])
 {
-  //Start up SDL and create window
-  if (!init())
+  if (!glfwInit())
   {
-    printf("Failed to initialize!\n");
-  }
-  else
-  {
-    //Load media
-    if (!loadMedia())
-    {
-      printf("Failed to load media!\n");
-    }
-    else
-    {
-      //Main loop flag
-      bool quit = false;
-
-      //Event handler
-      SDL_Event e;
-
-      //While application is running
-      while (!quit)
-      {
-        //Handle events on queue
-        while (SDL_PollEvent(&e) != 0)
-        {
-          //User requests quit
-          if (e.type == SDL_QUIT)
-          {
-            quit = true;
-          }
-        }
-
-        //Apply the PNG image
-        SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, NULL);
-
-        //Update the surface
-        SDL_UpdateWindowSurface(gWindow);
-      }
-    }
+    std::cout << "Failed to initialized GLFW\n";
+    return -1;
   }
 
-  //Free resources and close SDL
-  close();
+  glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL 
+
+                                                                 // Open a window and create its OpenGL context
+  GLFWwindow* window; // (In the accompanying source code, this variable is global for simplicity)
+  window = glfwCreateWindow(1024, 768, "Tutorial 01", NULL, NULL);
+  if (window == NULL) {
+    fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
+    glfwTerminate();
+    return -1;
+  }
+  glfwMakeContextCurrent(window); // Initialize GLEW
+  glewExperimental = true; // Needed in core profile
+  if (glewInit() != GLEW_OK) {
+    fprintf(stderr, "Failed to initialize GLEW\n");
+    return -1;
+  }
+
+  // Ensure we can capture the escape key being pressed below
+  glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+  do {
+    // Draw nothing, see you in tutorial 2 !
+
+    // Swap buffers
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+
+  } // Check if the ESC key was pressed or the window was closed
+  while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+    glfwWindowShouldClose(window) == 0);
 
   return 0;
 }
