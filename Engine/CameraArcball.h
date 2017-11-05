@@ -6,10 +6,15 @@
 #include <vector>
 #include <iostream>
 
+#ifdef ENGINE_EXPORTS
+#define ENGINE_API __declspec(dllexport)
+#else
+#define ENGINE_API __declspec(dllimport)
+#endif
 #define PI 3.1415
 
 namespace Shady {
-	class CameraArcball {
+	class ENGINE_API CameraArcball {
 	private:
 		float radius;
 		float theta;
