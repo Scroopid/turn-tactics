@@ -1,31 +1,52 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Turn Tactics", "Turn Tactics.vcxproj", "{96F706BE-FA63-49D3-A0D3-E298CF8C2369}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{5499A3F6-3330-4936-8147-AF2F3D5CAB3D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{EC43C968-88CB-42DD-9E9B-DBE54268BA35}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5499A3F6-3330-4936-8147-AF2F3D5CAB3D} = {5499A3F6-3330-4936-8147-AF2F3D5CAB3D}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F269DF39-06F3-4378-BB4B-3EB7A7EA1D99}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{73A1D0CC-A218-4B36-99BB-69EAE6E87EFF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Basic_Triangle", "Test\Basic_Triangle\Basic_Triangle.vcxproj", "{BCE116CD-C490-4B0E-A923-043707EFC723}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5499A3F6-3330-4936-8147-AF2F3D5CAB3D} = {5499A3F6-3330-4936-8147-AF2F3D5CAB3D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{96F706BE-FA63-49D3-A0D3-E298CF8C2369}.Debug|x64.ActiveCfg = Debug|x64
-		{96F706BE-FA63-49D3-A0D3-E298CF8C2369}.Debug|x64.Build.0 = Debug|x64
-		{96F706BE-FA63-49D3-A0D3-E298CF8C2369}.Debug|x86.ActiveCfg = Debug|Win32
-		{96F706BE-FA63-49D3-A0D3-E298CF8C2369}.Debug|x86.Build.0 = Debug|Win32
-		{96F706BE-FA63-49D3-A0D3-E298CF8C2369}.Release|x64.ActiveCfg = Release|x64
-		{96F706BE-FA63-49D3-A0D3-E298CF8C2369}.Release|x64.Build.0 = Release|x64
-		{96F706BE-FA63-49D3-A0D3-E298CF8C2369}.Release|x86.ActiveCfg = Release|Win32
-		{96F706BE-FA63-49D3-A0D3-E298CF8C2369}.Release|x86.Build.0 = Release|Win32
+		{5499A3F6-3330-4936-8147-AF2F3D5CAB3D}.Debug|x64.ActiveCfg = Debug|x64
+		{5499A3F6-3330-4936-8147-AF2F3D5CAB3D}.Debug|x64.Build.0 = Debug|x64
+		{5499A3F6-3330-4936-8147-AF2F3D5CAB3D}.Release|x64.ActiveCfg = Release|x64
+		{5499A3F6-3330-4936-8147-AF2F3D5CAB3D}.Release|x64.Build.0 = Release|x64
+		{EC43C968-88CB-42DD-9E9B-DBE54268BA35}.Debug|x64.ActiveCfg = Debug|x64
+		{EC43C968-88CB-42DD-9E9B-DBE54268BA35}.Debug|x64.Build.0 = Debug|x64
+		{EC43C968-88CB-42DD-9E9B-DBE54268BA35}.Release|x64.ActiveCfg = Release|x64
+		{EC43C968-88CB-42DD-9E9B-DBE54268BA35}.Release|x64.Build.0 = Release|x64
+		{BCE116CD-C490-4B0E-A923-043707EFC723}.Debug|x64.ActiveCfg = Debug|x64
+		{BCE116CD-C490-4B0E-A923-043707EFC723}.Debug|x64.Build.0 = Debug|x64
+		{BCE116CD-C490-4B0E-A923-043707EFC723}.Release|x64.ActiveCfg = Release|x64
+		{BCE116CD-C490-4B0E-A923-043707EFC723}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5499A3F6-3330-4936-8147-AF2F3D5CAB3D} = {73A1D0CC-A218-4B36-99BB-69EAE6E87EFF}
+		{EC43C968-88CB-42DD-9E9B-DBE54268BA35} = {73A1D0CC-A218-4B36-99BB-69EAE6E87EFF}
+		{BCE116CD-C490-4B0E-A923-043707EFC723} = {F269DF39-06F3-4378-BB4B-3EB7A7EA1D99}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D824F92D-9E1F-4FEC-9996-B1382143D39F}
+		SolutionGuid = {F8A6F66C-91E3-4C86-BA15-5A4AC966A728}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,1 @@
+This is the resource directory for any engine assets such as debug textures/models/sounds.

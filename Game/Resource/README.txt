@@ -1,0 +1,1 @@
+This is the resource directory for any Game assets such as textures/models/sounds.
