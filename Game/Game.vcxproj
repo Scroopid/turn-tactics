@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -119,7 +119,7 @@
       <Command>xcopy /y /d "$(OutDir)*.exe" "$(SolutionDir)Build\$(Configuration)"
 if not exist "$(SolutionDir)Build\$(Configuration)\Resource\Game\" mkdir "$(SolutionDir)Build\$(Configuration)\Resource\Game"
 xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resource\Game\"
-</Command>
+xcopy /y /d "$(SolutionDir)Engine\Build\$(Configuration)\*.dll" "$(SolutionDir)Build\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -157,7 +157,7 @@ xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resour
       <Command>xcopy /y /d "$(OutDir)*.exe" "$(SolutionDir)Build\$(Configuration)"
 if not exist "$(SolutionDir)Build\$(Configuration)\Resource\Game\" mkdir "$(SolutionDir)Build\$(Configuration)\Resource\Game"
 xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resource\Game\"
-</Command>
+xcopy /y /d "$(SolutionDir)Engine\Build\$(Configuration)\*.dll" "$(SolutionDir)Build\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
