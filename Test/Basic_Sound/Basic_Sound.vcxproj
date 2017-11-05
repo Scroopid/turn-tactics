@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{BCE116CD-C490-4B0E-A923-043707EFC723}</ProjectGuid>
+    <ProjectGuid>{3a3f9de8-9b55-43e0-a804-0f2e9793f3a4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>BasicTriangle</RootNamespace>
+    <RootNamespace>Basic_Sound</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -157,12 +157,12 @@ xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resour
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\TestMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Engine\Engine.vcxproj">
       <Project>{5499a3f6-3330-4936-8147-af2f3d5cab3d}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\TestMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
