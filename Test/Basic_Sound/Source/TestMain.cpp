@@ -4,9 +4,8 @@
 
 int main(void)
 {
-  std::cout << "Here is a basic Test..." << std::endl;
 
-  assert(true == true);
+	assert(true == true);
 
-  return 0;
+	return 0;
 }
