@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(OPENAL_SDK)include;$(SolutionDir)Library\glm;$(SolutionDir)Library\glfw\include;$(SolutionDir)Library\glew\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENAL_SDK)include;$(SolutionDir)Library\json;$(SolutionDir)Library\glm;$(SolutionDir)Library\glfw\include;$(SolutionDir)Library\glew\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(OPENAL_SDK)libs\Win64;$(SolutionDir)Library\glfw\lib\Debug;$(SolutionDir)Library\glew\lib\Release\x64;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)Build\$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
@@ -87,7 +87,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(OPENAL_SDK)include;$(SolutionDir)Library\glm;$(SolutionDir)Library\glfw\include;$(SolutionDir)Library\glew\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENAL_SDK)include;$(SolutionDir)Library\json;$(SolutionDir)Library\glm;$(SolutionDir)Library\glfw\include;$(SolutionDir)Library\glew\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(OPENAL_SDK)libs\Win64;$(SolutionDir)Library\glew\lib\Release\x64;$(SolutionDir)Library\glfw\lib\Release;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)Build\$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
