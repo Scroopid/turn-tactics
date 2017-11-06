@@ -185,13 +185,13 @@ xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resour
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CameraArcball.cpp" />
+    <ClCompile Include="Source\CameraArcball.cpp" />
     <ClCompile Include="Source\dllmain.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CameraArcball.h" />
+    <ClInclude Include="Include\CameraArcball.h" />
     <ClInclude Include="Include\Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

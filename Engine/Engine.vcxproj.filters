@@ -24,7 +24,7 @@
     <ClCompile Include="Source\Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CameraArcball.cpp">
+    <ClCompile Include="Source\CameraArcball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="Include\Test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CameraArcball.h">
+    <ClInclude Include="Include\CameraArcball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
