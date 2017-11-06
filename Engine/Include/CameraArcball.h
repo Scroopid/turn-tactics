@@ -13,6 +13,7 @@
 #include <iostream>
 
 #include <GL\glew.h>
+#include <GLFW\glfw3.h>
 
 #define PI 3.1415
 
@@ -34,12 +35,12 @@ namespace Shady {
 		void radius_add(float add);
 		void theta_add(float add);
 		void phi_add(float add);
-		void adjust_angle();
+		void adjust_angle(float theta_adder, float phi_adder);
 		void update();
 		CameraArcball operator+(const glm::vec3&);
 		CameraArcball operator-(const glm::vec3&);
 		CameraArcball operator+=(const glm::vec3&);
 		CameraArcball operator-=(const glm::vec3&);
-		friend std::ostream &operator<<(std::ostream& output, const CameraArcball& cam);
+		friend ENGINE_API std::ostream &operator<<(std::ostream& output, const CameraArcball& cam);
 	};
 }

@@ -30,6 +30,8 @@ void Shady::CameraArcball::move(glm::vec3 add) {
 
 void Shady::CameraArcball::radius_add(float add) {
 	radius += add;
+	if(radius < 1) radius = 1;
+	else if(radius > 100) radius = 100;
 }
 
 void Shady::CameraArcball::theta_add(float add) {
@@ -41,8 +43,13 @@ void Shady::CameraArcball::theta_add(float add) {
 }
 
 void Shady::CameraArcball::phi_add(float add) {
-	if(phi + add >= PI / 2 || phi + add <= -PI / 2) return;
+	if(phi + add >= PI / 2 || phi + add <= 0) return;
 	phi += add;
+}
+
+void Shady::CameraArcball::adjust_angle(float theta_adder, float phi_adder) {
+	theta_add(theta_adder);
+	phi_add(phi_adder);
 }
 
 void Shady::CameraArcball::update() {
@@ -82,7 +89,7 @@ Shady::CameraArcball Shady::CameraArcball::operator-=(const glm::vec3& add) {
 	return *this;
 }
 
-std::ostream & Shady::operator<<(std::ostream & output, const CameraArcball& cam) {
+ENGINE_API std::ostream & Shady::operator<<(std::ostream & output, const CameraArcball& cam) {
 	output << "X: " << cam.position[0] << ", Y: " << cam.position[1] << ", Z: " << cam.position[2] << "\n";
 	output << "Radius: " << cam.radius << ", Theta: " << cam.theta << ", Phi: " << cam.phi << "\n";
 	return output;
