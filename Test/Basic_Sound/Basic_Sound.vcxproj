@@ -77,7 +77,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)Build\$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
-    <IncludePath>$(OPENAL_SDK)include;$(SolutionDir)Library\glm;$(SolutionDir)Library\glew\include;$(SolutionDir)Library\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir)Library\json;$(OPENAL_SDK)include;$(SolutionDir)Library\glm;$(SolutionDir)Library\glew\include;$(SolutionDir)Library\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(OPENAL_SDK)libs\Win64;$(SolutionDir)Library\glfw\lib\$(Configuration);$(SolutionDir)Library\glew\lib\Release\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -87,7 +87,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)Build\$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
-    <IncludePath>$(OPENAL_SDK)include;$(SolutionDir)Library\glm;$(SolutionDir)Library\glew\include;$(SolutionDir)Library\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir)Library\json;$(OPENAL_SDK)include;$(SolutionDir)Library\glm;$(SolutionDir)Library\glew\include;$(SolutionDir)Library\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(OPENAL_SDK)libs\Win64;$(SolutionDir)Library\glfw\lib\$(Configuration);$(SolutionDir)Library\glew\lib\Release\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
