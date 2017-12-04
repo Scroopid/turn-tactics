@@ -21,11 +21,6 @@ GLFWwindow* window;
 #include "CameraArcball.h"
 
 GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path);
-double scroll;
-
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-	scroll += yoffset;
-}
 
 int main(void)
 {
@@ -173,14 +168,11 @@ int main(void)
 
 
 
-	glfwSetScrollCallback(window, scroll_callback);
-	Shady::CameraArcball cam(MatrixID);
+	Shady::CameraArcball cam(MatrixID, window);
 	cam.phi_add(0.5);
 	cam.theta_add(-0.5);
-	cam.update();
-	double last_x = 0;
-	double last_y = 0;
-	double cur_dif[2];
+	cam.update(false);
+	
 
 
 
@@ -191,25 +183,7 @@ int main(void)
 		// Use our shader
 		glUseProgram(programID);
 
-
-
-		{
-			double temp_x, temp_y;
-			glfwGetCursorPos(window, &temp_x, &temp_y);
-			cur_dif[0] = last_x - temp_x;
-			cur_dif[1] = last_y - temp_y;
-			last_x = temp_x; last_y = temp_y;
-
-			int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-			if(state == GLFW_PRESS)
-				cam.adjust_angle(2 * PI * float(-cur_dif[0] / 1024), PI * float(-cur_dif[1] / 768));
-
-			cam.radius_add(-scroll);
-			scroll = 0;
-
-		}
-
-		cam.update();
+		cam.update(true);
 		std::cout << cam;
 
 
