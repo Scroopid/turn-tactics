@@ -119,6 +119,7 @@ namespace Shady {
 /*
 BASIC SETUP:
 
+#define move_speed 0.05
 double scroll = 0;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
@@ -132,12 +133,36 @@ Shady::CameraArcball cam(MatrixID);
 
 LOOP{
 	double temp_x, temp_y;
-	glfwGetCursorPos(window, &temp_x, &temp_y);
+			glfwGetCursorPos(window, &temp_x, &temp_y);
 
-	int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-	if(state == GLFW_PRESS)
-		cam.update(temp_x / 1024, temp_y / 768, scroll);
-	scroll = 0;
+			int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+			if(state == GLFW_PRESS)
+				cam.update(temp_x / 1024, temp_y / 768, scroll);
+			else
+				cam.update(-1, -1, scroll);
+			scroll = 0;
+
+			glm::vec3 temp {0,0,0};
+			state = glfwGetKey(window, GLFW_KEY_E);
+			if(state == GLFW_PRESS)
+				temp[1] -= move_speed;
+			state = glfwGetKey(window, GLFW_KEY_Q);
+			if(state == GLFW_PRESS)
+				temp[1] += move_speed;
+			state = glfwGetKey(window, GLFW_KEY_W);
+			if(state == GLFW_PRESS)
+				temp[0] -= move_speed;
+			state = glfwGetKey(window, GLFW_KEY_S);
+			if(state == GLFW_PRESS)
+				temp[0] += move_speed;
+			state = glfwGetKey(window, GLFW_KEY_A);
+			if(state == GLFW_PRESS)
+				temp[2] += move_speed;
+			state = glfwGetKey(window, GLFW_KEY_D);
+			if(state == GLFW_PRESS)
+				temp[2] -= move_speed;
+
+			cam += temp;
 }
 
 */
