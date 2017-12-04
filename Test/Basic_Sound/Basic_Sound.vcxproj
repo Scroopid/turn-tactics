@@ -116,7 +116,9 @@
     <PostBuildEvent>
       <Command>xcopy /y /d "$(OutDir)*.exe" "$(SolutionDir)Build\$(Configuration)\"
 if not exist "$(SolutionDir)Build\$(Configuration)\Resource\$(ProjectName)\" mkdir "$(SolutionDir)Build\$(Configuration)\Resource\$(ProjectName)"
-xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resource\$(ProjectName)"</Command>
+xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resource\$(ProjectName)"
+xcopy /y /d "$(OutDir)*.pdb" "$(SolutionDir)Build\$(Configuration)\"
+xcopy /y /d "$(OutDir)*.ilk" "$(SolutionDir)Build\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -153,7 +155,9 @@ xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resour
     <PostBuildEvent>
       <Command>xcopy /y /d "$(OutDir)*.exe" "$(SolutionDir)Build\$(Configuration)\"
 if not exist "$(SolutionDir)Build\$(Configuration)\Resource\$(ProjectName)\" mkdir "$(SolutionDir)Build\$(Configuration)\Resource\$(ProjectName)"
-xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resource\$(ProjectName)"</Command>
+xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resource\$(ProjectName)"
+xcopy /y /d "$(OutDir)*.pdb" "$(SolutionDir)Build\$(Configuration)\"
+xcopy /y /d "$(OutDir)*.ilk" "$(SolutionDir)Build\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

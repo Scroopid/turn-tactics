@@ -22,6 +22,12 @@ GLFWwindow* window;
 
 GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path);
 
+double scroll = 0;
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+	scroll += yoffset;
+}
+
 int main(void)
 {
 	// Initialise GLFW
@@ -167,14 +173,11 @@ int main(void)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
 
-
-	Shady::CameraArcball cam(MatrixID, window);
+	glfwSetScrollCallback(window, scroll_callback);
+	Shady::CameraArcball cam(MatrixID);
 	cam.phi_add(0.5);
 	cam.theta_add(-0.5);
-	cam.update(false);
-	
-
-
+	cam.update();
 
 	do {
 		// Clear the screen
@@ -182,10 +185,16 @@ int main(void)
 
 		// Use our shader
 		glUseProgram(programID);
+		{
+			double temp_x, temp_y;
+			glfwGetCursorPos(window, &temp_x, &temp_y);
 
-		cam.update(true);
+			int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+			if(state == GLFW_PRESS)
+				cam.update(temp_x / 1024, temp_y / 768, scroll);
+		}
+		scroll = 0;
 		std::cout << cam;
-
 
 
 		// 1rst attribute buffer : vertices

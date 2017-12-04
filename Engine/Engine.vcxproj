@@ -131,6 +131,8 @@ xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resour
 xcopy /y /d "$(OutDir)*.dll" "$(SolutionDir)Build\$(Configuration)"
 if not exist "$(SolutionDir)Build\$(Configuration)\Resource\Engine\" mkdir "$(SolutionDir)Build\$(Configuration)\Resource\Engine"
 xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resource\Engine\"
+xcopy /y /d "$(OutDir)*.pdb" "$(SolutionDir)Build\$(Configuration)\"
+xcopy /y /d "$(OutDir)*.ilk" "$(SolutionDir)Build\$(Configuration)\"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -181,6 +183,8 @@ xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resour
 xcopy /y /d "$(OutDir)*.dll" "$(SolutionDir)Build\$(Configuration)"
 if not exist "$(SolutionDir)Build\$(Configuration)\Resource\Engine\" mkdir "$(SolutionDir)Build\$(Configuration)\Resource\Engine"
 xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resource\Engine\"
+xcopy /y /d "$(OutDir)*.pdb" "$(SolutionDir)Build\$(Configuration)\"
+xcopy /y /d "$(OutDir)*.ilk" "$(SolutionDir)Build\$(Configuration)\"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
