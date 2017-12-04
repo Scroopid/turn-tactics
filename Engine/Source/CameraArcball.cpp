@@ -70,7 +70,7 @@ void Shady::CameraArcball::update(bool use_mouse_input) {
 		double scroll2;
 		GLFWscrollfun(window);
 		if(state == GLFW_PRESS)
-			this.adjust_angle(2 * PI * float(-cur_dif[0] / 1024), PI * float(-cur_dif[1] / 768));
+			adjust_angle(2 * PI * float(-cur_dif[0] / 1024), PI * float(-cur_dif[1] / 768));
 
 		radius_add(-scroll);
 		scroll = 0;
