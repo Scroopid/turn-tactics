@@ -164,6 +164,9 @@ xcopy /y /d "$(ProjectDir)Resource" "$(SolutionDir)Build\$(Configuration)\Resour
   <ItemGroup>
     <ClCompile Include="Source\TestMain.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Model.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
