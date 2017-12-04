@@ -13,11 +13,15 @@ bool Shady::CameraArcball::Fix() {
 	return false;
 }
 
-Shady::CameraArcball::CameraArcball(GLuint max) {
+Shady::CameraArcball::CameraArcball(GLuint max, GLFWwindow* window) {
 	radius = 10;
 	theta = 0;
 	phi = 0;
 	matrix_id = max;
+	this->window = window;
+	if(window != nullptr) {
+		//glfwSetScrollCallback(window, this->scroll_callback);
+	}
 }
 
 glm::vec3 Shady::CameraArcball::get_position() {
@@ -52,7 +56,26 @@ void Shady::CameraArcball::adjust_angle(float theta_adder, float phi_adder) {
 	phi_add(phi_adder);
 }
 
-void Shady::CameraArcball::update() {
+void Shady::CameraArcball::update(bool use_mouse_input) {
+
+	if(use_mouse_input) {
+		double cur_dif[2];
+		double temp_x, temp_y;
+		glfwGetCursorPos(window, &temp_x, &temp_y);
+		cur_dif[0] = last_x - temp_x;
+		cur_dif[1] = last_y - temp_y;
+		last_x = temp_x; last_y = temp_y;
+
+		int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+		double scroll2;
+		GLFWscrollfun(window);
+		if(state == GLFW_PRESS)
+			this.adjust_angle(2 * PI * float(-cur_dif[0] / 1024), PI * float(-cur_dif[1] / 768));
+
+		radius_add(-scroll);
+		scroll = 0;
+	}
+
 	last[0] = position[0] + radius*cos(phi)*cos(theta);
 	last[1] = position[1] + radius*sin(phi);
 	last[2] = position[2] + radius*cos(phi) * sin(theta);
@@ -93,4 +116,8 @@ ENGINE_API std::ostream & Shady::operator<<(std::ostream & output, const CameraA
 	output << "X: " << cam.position[0] << ", Y: " << cam.position[1] << ", Z: " << cam.position[2] << "\n";
 	output << "Radius: " << cam.radius << ", Theta: " << cam.theta << ", Phi: " << cam.phi << "\n";
 	return output;
+}
+
+void Shady::CameraArcball::scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+	scroll += yoffset;
 }
