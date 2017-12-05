@@ -92,6 +92,24 @@ void Shady::CameraArcball::snap_right() {
 	fix();
 }
 
+void Shady::CameraArcball::snap_up() {
+	float size = (PI / 2.0 / phi_snap_amount);
+	float temp_cur = (phi / size);
+	int cur = within(temp_cur, 0.01, (int) temp_cur) ? temp_cur : temp_cur + 0.1;
+	if(cur >= phi_snap_amount) return;
+	phi = (cur + 1) * size;
+	fix();
+}
+
+void Shady::CameraArcball::snap_down() {
+	float size = (PI / 2.0 / phi_snap_amount);
+	float temp_cur = (phi / size);
+	int cur = within(temp_cur, 0.01, (int) temp_cur) ? temp_cur : temp_cur + 0.1;
+	if(cur <= 0) return;
+	phi = (cur - 1) * size;
+	fix();
+}
+
 void Shady::CameraArcball::update(double cursor_x, double cursor_y, double scroll_y) {
 
 	double cur_dif[2];

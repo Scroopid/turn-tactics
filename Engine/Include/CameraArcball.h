@@ -41,7 +41,7 @@ namespace Shady {
 		@param theta_snaps amoutn of snap points for theta
 		@param phi_snaps amount of snap points for phi
 		*/
-		CameraArcball(GLuint, short = 8, short = 8);
+		CameraArcball(GLuint, short = 16, short = 8);
 		glm::vec3 get_position();
 		/**
 		Moves the look-at-point adding the given values

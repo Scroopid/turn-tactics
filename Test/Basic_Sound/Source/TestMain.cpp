@@ -35,6 +35,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		cam.snap_right();
 	}else if(key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
 		cam.snap_left();
+	} else if(key == GLFW_KEY_UP && action == GLFW_PRESS) {
+		cam.snap_up();
+	} else if(key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+		cam.snap_down();
 	}
 }
 
