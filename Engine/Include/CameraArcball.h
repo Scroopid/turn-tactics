@@ -129,49 +129,66 @@ namespace Shady {
 BASIC SETUP:
 
 #define move_speed 0.05
-double scroll = 0;
+Shady::CameraArcball cam = NULL;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-scroll += yoffset;
+	cam.radius_add(-yoffset);
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	if(key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
+		cam.snap_right();
+	}else if(key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+		cam.snap_left();
+	} else if(key == GLFW_KEY_UP && action == GLFW_PRESS) {
+		cam.snap_up();
+	} else if(key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+		cam.snap_down();
+	}
 }
 
 ...
 
 GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-Shady::CameraArcball cam(MatrixID);
+
+...
+
+glfwSetScrollCallback(window, scroll_callback);
+glfwSetKeyCallback(window, key_callback);
+cam = Shady::CameraArcball(MatrixID);
+cam.update();
 
 LOOP{
 	double temp_x, temp_y;
-			glfwGetCursorPos(window, &temp_x, &temp_y);
+	glfwGetCursorPos(window, &temp_x, &temp_y);
 
-			int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-			if(state == GLFW_PRESS)
-				cam.update(temp_x / 1024, temp_y / 768, scroll);
-			else
-				cam.update(-1, -1, scroll);
-			scroll = 0;
+	int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+	if(state == GLFW_PRESS)
+		cam.update(temp_x / 1024, temp_y / 768, 0);
+	else
+		cam.update(-1, -1, 0);
 
-			glm::vec3 temp {0,0,0};
-			state = glfwGetKey(window, GLFW_KEY_E);
-			if(state == GLFW_PRESS)
-				temp[1] -= move_speed;
-			state = glfwGetKey(window, GLFW_KEY_Q);
-			if(state == GLFW_PRESS)
-				temp[1] += move_speed;
-			state = glfwGetKey(window, GLFW_KEY_W);
-			if(state == GLFW_PRESS)
-				temp[0] -= move_speed;
-			state = glfwGetKey(window, GLFW_KEY_S);
-			if(state == GLFW_PRESS)
-				temp[0] += move_speed;
-			state = glfwGetKey(window, GLFW_KEY_A);
-			if(state == GLFW_PRESS)
-				temp[2] += move_speed;
-			state = glfwGetKey(window, GLFW_KEY_D);
-			if(state == GLFW_PRESS)
-				temp[2] -= move_speed;
+	glm::vec3 temp {0,0,0};
+	state = glfwGetKey(window, GLFW_KEY_E);
+	if(state == GLFW_PRESS)
+		temp[1] -= move_speed;
+	state = glfwGetKey(window, GLFW_KEY_Q);
+	if(state == GLFW_PRESS)
+		temp[1] += move_speed;
+	state = glfwGetKey(window, GLFW_KEY_W);
+	if(state == GLFW_PRESS)
+		temp[0] -= move_speed;
+	state = glfwGetKey(window, GLFW_KEY_S);
+	if(state == GLFW_PRESS)
+		temp[0] += move_speed;
+	state = glfwGetKey(window, GLFW_KEY_A);
+	if(state == GLFW_PRESS)
+		temp[2] += move_speed;
+	state = glfwGetKey(window, GLFW_KEY_D);
+	if(state == GLFW_PRESS)
+		temp[2] -= move_speed;
 
-			cam += temp;
+	cam += temp;
 }
 
 */

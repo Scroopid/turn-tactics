@@ -23,11 +23,10 @@ GLFWwindow* window;
 GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path);
 
 #define move_speed 0.05
-double scroll = 0;
 Shady::CameraArcball cam = NULL;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-	scroll += yoffset;
+	cam.radius_add(-yoffset);
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -204,10 +203,9 @@ int main(void)
 
 			int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
 			if(state == GLFW_PRESS)
-				cam.update(temp_x / 1024, temp_y / 768, scroll);
+				cam.update(temp_x / 1024, temp_y / 768, 0);
 			else
-				cam.update(-1, -1, scroll);
-			scroll = 0;
+				cam.update(-1, -1, 0);
 
 			glm::vec3 temp {0,0,0};
 			state = glfwGetKey(window, GLFW_KEY_E);
