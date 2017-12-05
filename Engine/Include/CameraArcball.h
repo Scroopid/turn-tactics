@@ -29,14 +29,19 @@ namespace Shady {
 		glm::vec3 last { 0,0,0 };//this is where the calculations for the cameras position are stored (updates when update is called)
 		double last_x = 0;//last mouse X position IF CAMERA IS MOVING otherwise its -1.
 		double last_y = 0;//last mouse Y position IF CAMERA IS MOVING otherwise its -1.
+		short theta_snap_amount;//amount of snapping positions for theta.
+		short phi_snap_amount;//amount of snapping positions for phi.
+		float snap_speed;
 		bool fix();
 	public:
 		/**
 		this class does cool arcball camera math for you.
 
 		@param max Matrix Id
+		@param theta_snaps amoutn of snap points for theta
+		@param phi_snaps amount of snap points for phi
 		*/
-		CameraArcball(GLuint);
+		CameraArcball(GLuint, short = 8, short = 8);
 		glm::vec3 get_position();
 		/**
 		Moves the look-at-point adding the given values
@@ -93,6 +98,10 @@ namespace Shady {
 		@param phi_adder amount to add to Phi (vertical angle)
 		*/
 		void adjust_angle(float theta_adder, float phi_adder);
+		void snap_left();
+		void snap_right();
+		void snap_up();
+		void snap_down();
 		/**
 		Updates camera position based on Radius, Phi, and Theta.
 

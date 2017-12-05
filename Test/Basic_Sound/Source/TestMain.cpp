@@ -24,9 +24,18 @@ GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_pat
 
 #define move_speed 0.05
 double scroll = 0;
+Shady::CameraArcball cam = NULL;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 	scroll += yoffset;
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	if(key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
+		cam.snap_right();
+	}else if(key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+		cam.snap_left();
+	}
 }
 
 int main(void)
@@ -175,7 +184,8 @@ int main(void)
 
 
 	glfwSetScrollCallback(window, scroll_callback);
-	Shady::CameraArcball cam(MatrixID);
+	glfwSetKeyCallback(window, key_callback);
+	cam = Shady::CameraArcball(MatrixID);
 	cam.update();
 
 	do {

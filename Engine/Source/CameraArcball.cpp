@@ -1,22 +1,28 @@
 #include "CameraArcball.h"
 
+inline bool within(float number, float amount, float value) {
+	return value < number + amount && value > number - amount;
+}
+
 bool Shady::CameraArcball::fix() {
 	while(theta < 0)
-		theta += PI;
-	while(theta > PI)
-		theta -= PI;
+		theta += PI * 2;
+	while(theta > PI * 2)
+		theta -= PI * 2;
 	while(phi < 0)
-		phi += 2 * PI;
-	while(phi > 2 * PI)
-		phi -= 2 * PI;
+		phi += PI / 2;
+	while(phi > PI / 2)
+		phi -= PI / 2;
 
 	return false;
 }
 
-Shady::CameraArcball::CameraArcball(GLuint max) {
+Shady::CameraArcball::CameraArcball(GLuint max, short theta_snaps, short phi_snaps) {
 	radius = 10;
 	theta = 0;
 	phi = 0;
+	theta_snap_amount = theta_snaps;
+	phi_snap_amount = phi_snaps;
 	matrix_id = max;
 }
 
@@ -68,6 +74,22 @@ void Shady::CameraArcball::phi_set(float angle) {
 void Shady::CameraArcball::adjust_angle(float theta_adder, float phi_adder) {
 	theta_add(theta_adder);
 	phi_add(phi_adder);
+}
+
+void Shady::CameraArcball::snap_left() {
+	float size = (PI * 2.0 / theta_snap_amount);
+	float temp_cur = (theta / size);
+	int cur = within(temp_cur, 0.01, (int)temp_cur) ? temp_cur : temp_cur + 0.1;
+	theta = (cur + 1) * size;
+	fix();
+}
+
+void Shady::CameraArcball::snap_right() {
+	float size = (PI * 2.0 / theta_snap_amount);
+	float temp_cur = (theta / size);
+	int cur = within(temp_cur, 0.01, (int) temp_cur) ? temp_cur : temp_cur + 0.1;
+	theta = (cur - 1) * size;
+	fix();
 }
 
 void Shady::CameraArcball::update(double cursor_x, double cursor_y, double scroll_y) {
