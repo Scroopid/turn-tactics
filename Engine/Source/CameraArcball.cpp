@@ -1,9 +1,5 @@
 #include "CameraArcball.h"
 
-inline bool within(float number, float amount, float value) {
-	return value < number + amount && value > number - amount;
-}
-
 bool Shady::CameraArcball::fix() {
 	while(theta < 0)
 		theta += PI * 2;
@@ -30,8 +26,32 @@ glm::vec3 Shady::CameraArcball::get_position() {
 	return glm::vec3(position);
 }
 
+glm::vec3 Shady::CameraArcball::get_facing_vector() {
+	glm::vec3 normal = glm::normalize(last - position);
+	return normal;
+}
+
+glm::vec3 Shady::CameraArcball::get_facing_vector_XZ() {
+	glm::vec3 newlast(last);
+	newlast[1] = 0;
+	glm::vec3 newposition(position);
+	newposition[1] = 0;
+	glm::vec3 normal = glm::normalize(newlast - newposition);
+	return normal;
+}
+
 void Shady::CameraArcball::position_move(glm::vec3 add) {
 	position += add;
+}
+
+void Shady::CameraArcball::position_move_facing(glm::vec3 add) {
+	glm::vec3 facing = get_facing_vector_XZ();
+	glm::vec3 forward = facing * add[2];
+	facing = facing.zyx();
+	facing[2] = -facing[2];
+	glm::vec3 right = facing * add[0];
+	position += forward;
+	position -= right;
 }
 
 void Shady::CameraArcball::position_set(glm::vec3 values) {
@@ -139,12 +159,12 @@ void Shady::CameraArcball::update(double cursor_x, double cursor_y, double scrol
 }
 
 Shady::CameraArcball Shady::CameraArcball::operator+=(const glm::vec3& add) {
-	position += add;
+	position_move_facing(add);
 	return *this;
 }
 
 Shady::CameraArcball Shady::CameraArcball::operator-=(const glm::vec3& add) {
-	position -= add;
+	position_move_facing(-add);
 	return *this;
 }
 

@@ -6,6 +6,8 @@
 #define ENGINE_API __declspec(dllimport)
 #endif
 
+#define GLM_SWIZZLE
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -15,7 +17,7 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
-#define PI 3.1415
+#include "NumberHelper.h"
 
 namespace Shady {
 	class ENGINE_API CameraArcball {
@@ -44,11 +46,17 @@ namespace Shady {
 		CameraArcball(GLuint, short = 16, short = 8);
 		glm::vec3 get_position();
 		/**
+		gets the vector of the direction the camera is facing
+		*/
+		glm::vec3 get_facing_vector();
+		glm::vec3 get_facing_vector_XZ();
+		/**
 		Moves the look-at-point adding the given values
 
 		@param add a glm::vec3 to add to the current look-at-point
 		*/
 		void position_move(glm::vec3 add);
+		void position_move_facing(glm::vec3 add);
 		/**
 		sets the look-at-point with the given values
 
@@ -98,9 +106,21 @@ namespace Shady {
 		@param phi_adder amount to add to Phi (vertical angle)
 		*/
 		void adjust_angle(float theta_adder, float phi_adder);
+		/**
+		goes to the next left snap point around the look-at-point on theta
+		*/
 		void snap_left();
+		/**
+		goes to the next right snap point around the look-at-point on theta
+		*/
 		void snap_right();
+		/**
+		goes to the next upper snap point around the look-at-point on phi
+		*/
 		void snap_up();
+		/**
+		goes to the next downward snap point around the look-at-point on phi
+		*/
 		void snap_down();
 		/**
 		Updates camera position based on Radius, Phi, and Theta.

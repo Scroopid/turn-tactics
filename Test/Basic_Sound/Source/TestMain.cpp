@@ -216,17 +216,16 @@ int main(void)
 				temp[1] += move_speed;
 			state = glfwGetKey(window, GLFW_KEY_W);
 			if(state == GLFW_PRESS)
-				temp[0] -= move_speed;
+				temp[2] -= move_speed;
 			state = glfwGetKey(window, GLFW_KEY_S);
 			if(state == GLFW_PRESS)
-				temp[0] += move_speed;
+				temp[2] += move_speed;
 			state = glfwGetKey(window, GLFW_KEY_A);
 			if(state == GLFW_PRESS)
-				temp[2] += move_speed;
+				temp[0] += move_speed;
 			state = glfwGetKey(window, GLFW_KEY_D);
 			if(state == GLFW_PRESS)
-				temp[2] -= move_speed;
-
+				temp[0] -= move_speed;
 			cam += temp;
 
 		}

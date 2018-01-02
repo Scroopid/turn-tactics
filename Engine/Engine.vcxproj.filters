@@ -35,5 +35,11 @@
     <ClInclude Include="Include\CameraArcball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\NumberHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NumberHelper.cpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
