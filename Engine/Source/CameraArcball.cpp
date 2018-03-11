@@ -159,7 +159,8 @@ void Shady::CameraArcball::update(double cursor_x, double cursor_y, double scrol
 
 	glm::mat4 MVP = Projection * View * Model;
 
-	glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &MVP[0][0]);
+	//TODO fix viewport
+	//glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &MVP[0][0]);
 }
 
 void Shady::CameraArcball::update(GLFWwindow* window) {

@@ -1,4 +1,4 @@
-#include "ShadyKeyboard.h"
+#include "Input/ShadyKeyboard.h"
 
 namespace Shady {
 	namespace Input {
