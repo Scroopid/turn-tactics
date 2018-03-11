@@ -23,21 +23,21 @@ GLFWwindow* window;
 GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path);
 
 #define move_speed 0.05
-Shady::CameraArcball cam = NULL;
+Shady::CameraArcball* cam = NULL;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-	cam.radius_add(-yoffset);
+	cam->radius_add(-yoffset);
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if(key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
-		cam.snap_right();
+		cam->snap_right();
 	}else if(key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
-		cam.snap_left();
+		cam->snap_left();
 	} else if(key == GLFW_KEY_UP && action == GLFW_PRESS) {
-		cam.snap_up();
+		cam->snap_up();
 	} else if(key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
-		cam.snap_down();
+		cam->snap_down();
 	}
 }
 
@@ -186,10 +186,11 @@ int main(void)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
 
+	//cam = Shady::CameraArcball(MatrixID);
+	cam = new Shady::CameraArcball(MatrixID, 16, 8);
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetKeyCallback(window, key_callback);
-	cam = Shady::CameraArcball(MatrixID);
-	cam.update();
+	cam->update();
 
 	do {
 		// Clear the screen
@@ -201,14 +202,8 @@ int main(void)
 			double temp_x, temp_y;
 			glfwGetCursorPos(window, &temp_x, &temp_y);
 
-			int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-			if(state == GLFW_PRESS)
-				cam.update(temp_x / 1024, temp_y / 768, 0);
-			else
-				cam.update(-1, -1, 0);
-
-			glm::vec3 temp {0,0,0};
-			state = glfwGetKey(window, GLFW_KEY_E);
+			glm::vec3 temp { 0,0,0 };
+			int state = glfwGetKey(window, GLFW_KEY_E);
 			if(state == GLFW_PRESS)
 				temp[1] -= move_speed;
 			state = glfwGetKey(window, GLFW_KEY_Q);
@@ -226,8 +221,15 @@ int main(void)
 			state = glfwGetKey(window, GLFW_KEY_D);
 			if(state == GLFW_PRESS)
 				temp[0] -= move_speed;
-			cam += temp;
+			cam->position_move(temp);
 
+			state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+			if(state == GLFW_PRESS)
+				cam->update(temp_x / 1024, temp_y / 768, 0);
+			else
+				cam->update(-1, -1, 0);
+
+			
 		}
 		std::cout << cam;
 

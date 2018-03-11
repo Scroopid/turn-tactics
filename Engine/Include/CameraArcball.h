@@ -6,6 +6,8 @@
 #define ENGINE_API __declspec(dllimport)
 #endif
 
+#define PI 3.1415
+
 #define GLM_SWIZZLE
 
 #include <glm/glm.hpp>
@@ -16,8 +18,6 @@
 
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
-
-#include "NumberHelper.h"
 
 namespace Shady {
 	class ENGINE_API CameraArcball {
@@ -36,6 +36,7 @@ namespace Shady {
 		float snap_speed;
 		bool fix();
 	public:
+		const double default_move_speed = 0.05;
 		/**
 		this class does cool arcball camera math for you.
 
@@ -130,6 +131,11 @@ namespace Shady {
 		@param scroll_y raw change of Y axis of the mouse scroll wheel, changes distance from loot at point.
 		*/
 		void update(double cursor_x = -1.0, double cursor_y = -1.0, double scroll_y = 0.0);
+		/**
+		Updates camera position based on Radius, Phi, and Theta. using the input from the window used for testing.
+		*/
+		void update(GLFWwindow* window);
+		void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 		/**
 		See position_move(glm::vec3 add)
 		*/

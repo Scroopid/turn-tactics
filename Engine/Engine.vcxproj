@@ -189,6 +189,8 @@ xcopy /y /d "$(OutDir)*.ilk" "$(SolutionDir)Build\$(Configuration)\"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Input\ShadyKeyboard.cpp" />
+    <ClCompile Include="Source\Input\InputManager.cpp" />
     <ClCompile Include="Source\CameraArcball.cpp" />
     <ClCompile Include="Source\dllmain.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
@@ -198,6 +200,8 @@ xcopy /y /d "$(OutDir)*.ilk" "$(SolutionDir)Build\$(Configuration)\"
     <ClInclude Include="Include\CameraArcball.h" />
     <ClInclude Include="Include\NumberHelper.h" />
     <ClInclude Include="Include\Test.h" />
+    <ClInclude Include="Include\Input\InputManager.h" />
+    <ClInclude Include="Include\Input\ShadyKeyboard.h" />
     <ClInclude Include="Source\NumberHelper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

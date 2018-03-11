@@ -1,5 +1,9 @@
 #include "CameraArcball.h"
 
+inline bool within(float number, float amount, float value) {
+	return value < number + amount && value > number - amount;
+}
+
 bool Shady::CameraArcball::fix() {
 	while(theta < 0)
 		theta += PI * 2;
@@ -156,6 +160,14 @@ void Shady::CameraArcball::update(double cursor_x, double cursor_y, double scrol
 	glm::mat4 MVP = Projection * View * Model;
 
 	glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &MVP[0][0]);
+}
+
+void Shady::CameraArcball::update(GLFWwindow* window) {
+	
+}
+
+void Shady::CameraArcball::scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+	radius_add(-yoffset);
 }
 
 Shady::CameraArcball Shady::CameraArcball::operator+=(const glm::vec3& add) {
