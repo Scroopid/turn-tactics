@@ -168,6 +168,25 @@ private:
 		}
 	}
 
+	int rateDeviceSuitability(VkPhysicalDevice device) {
+		int score = 0;
+
+		VkPhysicalDeviceProperties device_properties;
+		VkPhysicalDeviceFeatures device_features;
+		vkGetPhysicalDeviceProperties(device, &device_properties);
+		vkGetPhysicalDeviceFeatures(device, &device_features);
+
+		if(!device_features.geometryShader) {
+			return 0;
+		}
+
+		if(device_properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
+			score += 1000;
+		}
+		// Detect descrete gpu because they are meant to be used for gaming
+		
+	}
+
 	bool isDeviceSuitable(VkPhysicalDevice device) {
 		VkPhysicalDeviceProperties deviceProperties;
 		vkGetPhysicalDeviceProperties(device, &deviceProperties);
