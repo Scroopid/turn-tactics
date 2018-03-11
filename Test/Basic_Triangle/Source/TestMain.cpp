@@ -35,6 +35,14 @@ void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT
 	}
 }
 
+struct QueueFamilyIndicies {
+	int graphics_family = -1;
+
+	bool isComplete() {
+		return graphics_family > -1;
+	}
+};
+
 class HelloTriangleApplication {
 public:
 	void run() {
@@ -180,20 +188,41 @@ private:
 			return 0;
 		}
 
+		// Detect descrete gpu because they are meant to be used for gaming
 		if(device_properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
 			score += 1000;
 		}
-		// Detect descrete gpu because they are meant to be used for gaming
-		
+
+		score += device_properties.limits.maxImageDimension2D;
+		return score;
 	}
 
 	bool isDeviceSuitable(VkPhysicalDevice device) {
-		VkPhysicalDeviceProperties deviceProperties;
-		vkGetPhysicalDeviceProperties(device, &deviceProperties);
-		VkPhysicalDeviceFeatures deviceFeatures;
-		vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+		QueueFamilyIndicies indicies = findQueueFamilies(device);
 
-		return true;
+		return indicies.isComplete();
+	}
+
+	QueueFamilyIndicies findQueueFamilies(VkPhysicalDevice device) {
+		QueueFamilyIndicies indicies;
+
+		uint32_t queue_family_count = 0;
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, nullptr);
+
+		std::vector<VkQueueFamilyProperties> queue_families(queue_family_count);
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, queue_families.data());
+
+		// Find queue family with graphics_bit set
+		int i = 0;
+		for (const auto& family : queue_families) {
+			if (family.queueCount > 0 && family.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+				indicies.graphics_family = i;
+				break;
+			}
+			++i;
+		}
+
+		return indicies;
 	}
 
 	bool checkValidationLayerSupport() {
